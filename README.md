@@ -11,7 +11,7 @@ warnings from Ruby and Rails to support your upgrade tool.
 
 To install Warning Signs add
 
-`gem "warning_sign"`
+`gem "warning_signs"`
 
 to your gemfile, you will most likely want it to be in all environments, but 
 under some use cases, you may not need it in production.
