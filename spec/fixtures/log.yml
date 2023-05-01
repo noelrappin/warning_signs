@@ -1,0 +1,3 @@
+handlers:
+  - environment: all
+    behavior: log

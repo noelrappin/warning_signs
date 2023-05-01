@@ -1,0 +1,8 @@
+handlers:
+  - environments:
+    - environment: production
+      behavior: ignore
+    - environment: development
+      behavior: log
+    - environment: test
+      behavior: raise

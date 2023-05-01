@@ -1,0 +1,7 @@
+handlers:
+  - source: ruby
+    environment: all
+    behavior: stderr
+  - source: rails
+    environment: all
+    behavior: log

@@ -1,0 +1,19 @@
+/.bundle/
+/.yardoc
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
+.DS_Store
+.bash_history
+.pry_history
+.byebug_history
+.idea
+
+# rspec failure tracking
+.rspec_status
+
+# generated gems
+*.gem

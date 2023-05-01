@@ -1,0 +1,5 @@
+handlers:
+  - environment: all
+    except:
+      - "Except this one"
+    behavior: raise
