@@ -6,6 +6,7 @@ PATH
       railties
 
 GEM
+  remote: https://rubygems.org/
   specs:
     actionpack (7.0.4.3)
       actionview (= 7.0.4.3)
