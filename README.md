@@ -22,6 +22,10 @@ The Warning Signs  gem looks for a `.warning_sign.yml` file when the Rails
 application starts. If it does not find the file, it will not load and the 
 processing of deprecations will be unaffected.
 
+You should remove any environment settings in Rails that are managing 
+`config.active_support.deprecation`, or at least those that are not
+set to `:notify` -- use WarningSigns to handle those settings...
+
 Warning Signs  allows you to define _handlers_ in the YAML file. A handler 
 consists of the following:
 
@@ -43,7 +47,8 @@ consists of the following:
   * `ignore` does nothing
 
 Handlers are matched in order. If no handler applies to a deprecation 
-warning, the warning is ignored. 
+warning, Ruby warnings is ignored, Rails warnings are passed through
+the ActiveSupport notification mechanism.
 
 The following sample logs all deprecation warnings:
 
