@@ -18,7 +18,7 @@ module WarningSigns
     def invoke
       case behavior
       when "raise"
-        raise RailsWarningError, message
+        raise UnhandledDeprecationError, message
       when "log"
         Rails.logger.warn(message)
       when "stderr"

@@ -14,7 +14,7 @@ module WarningSigns
 
   class InvalidHandlerError < StandardError; end
 
-  class RailsWarningError < StandardError; end
+  class UnhandledDeprecationError < StandardError; end
 end
 
 loader.eager_load

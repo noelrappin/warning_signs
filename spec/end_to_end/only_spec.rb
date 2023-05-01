@@ -19,7 +19,7 @@ RSpec.describe "With an only matcher" do
   describe "matching" do
     it "raises an error on a non-excepted match" do
       expect { Warning.warn("Only this one") }
-        .to raise_error(WarningSigns::RailsWarningError)
+        .to raise_error(WarningSigns::UnhandledDeprecationError)
     end
 
     it "does not raise an error on an excepted match" do

@@ -22,20 +22,20 @@ RSpec.describe "with a simple file that raises on everything" do
     it "does not write to standard error" do
       expect do
         Warning.warn("This is a dummy warning")
-      rescue WarningSigns::RailsWarningError
+      rescue WarningSigns::UnhandledDeprecationError
       end.not_to output.to_stderr
     end
 
     it "does not log" do
       begin
         Warning.warn("This is a dummy warning")
-      rescue WarningSigns::RailsWarningError
+      rescue WarningSigns::UnhandledDeprecationError
       end
       expect(Rails.logger.history).to be_empty
     end
 
     it "raises an error" do
-      expect { Warning.warn("This is a dummy warning") }.to raise_error(WarningSigns::RailsWarningError)
+      expect { Warning.warn("This is a dummy warning") }.to raise_error(WarningSigns::UnhandledDeprecationError)
     end
   end
 
@@ -43,20 +43,20 @@ RSpec.describe "with a simple file that raises on everything" do
     it "does not write to standard error" do
       expect do
         ActiveSupport::Deprecation.warn("This is a dummy warning")
-      rescue WarningSigns::RailsWarningError
+      rescue WarningSigns::UnhandledDeprecationError
       end.not_to output.to_stderr
     end
 
     it "does not log" do
       begin
         Warning.warn("This is a dummy warning")
-      rescue WarningSigns::RailsWarningError
+      rescue WarningSigns::UnhandledDeprecationError
       end
       expect(Rails.logger.history).to be_empty
     end
 
     it "raises an error" do
-      expect { ActiveSupport::Deprecation.warn("This is a dummy warning") }.to raise_error(WarningSigns::RailsWarningError)
+      expect { ActiveSupport::Deprecation.warn("This is a dummy warning") }.to raise_error(WarningSigns::UnhandledDeprecationError)
     end
   end
 end
