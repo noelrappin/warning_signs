@@ -9,8 +9,9 @@ module WarningSigns
     end
 
     def caller_location
-      caller_locations(2..).find do |location|
-        !location.to_s.include?("internal:warning")
+      caller_locations.find do |location|
+        !location.to_s.include?("internal:warning") &&
+          !location.to_s.include?("warning_signs")
       end
     end
   end
