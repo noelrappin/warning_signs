@@ -35,7 +35,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec-collection_matchers"
   spec.add_development_dependency "rspec_junit_formatter"
   spec.add_development_dependency "standard", ">= 1.0"
-  spec.add_development_dependency "simplecov", "~> 0.17.0"
+  spec.add_development_dependency "simplecov", "~> 0.22.0"
   spec.add_development_dependency "yard"
 
   spec.add_runtime_dependency "awesome_print"
