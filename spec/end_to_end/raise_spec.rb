@@ -12,7 +12,7 @@ RSpec.describe "with a simple file that raises on everything" do
     it "sets up the world" do
       expect(world).to have(1).handler
       expect(world.handlers.first.environments.first.environment).to be_all
-      expect(world.handlers.first.environments.first.behavior).to be_raise
+      expect(world.handlers.first.environments.first.behaviors).to match_array(["raise"])
       expect(world).to be_enabled_for_ruby
       expect(world).to be_enabled_for_rails
     end

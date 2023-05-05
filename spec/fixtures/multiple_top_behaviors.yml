@@ -1,0 +1,5 @@
+handlers:
+  - environment: all
+    behaviors:
+      - log
+      - stderr

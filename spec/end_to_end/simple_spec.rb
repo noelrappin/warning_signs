@@ -12,7 +12,7 @@ RSpec.describe "with a simple file that ignores everything" do
     it "sets up the world" do
       expect(world).to have(1).handler
       expect(world.handlers.first.environments.first.environment).to be_all
-      expect(world.handlers.first.environments.first.behavior).to be_ignore
+      expect(world.handlers.first.environments.first.behaviors).to match_array(["ignore"])
       expect(world).to be_enabled_for_ruby
       expect(world).to be_enabled_for_rails
     end

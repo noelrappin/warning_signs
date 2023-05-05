@@ -15,7 +15,7 @@ module WarningSigns
         deprecation = Deprecation.new("message", source: "ruby")
         world.handlers = [handler]
         expect(deprecation.handler).to eq(handler)
-        expect(deprecation.behavior).to be_ignore
+        expect(deprecation.behaviors).to match_array([])
       end
 
       it "returns the right handler and behavior where there is behavior" do
@@ -23,7 +23,15 @@ module WarningSigns
         deprecation = Deprecation.new("message", source: "ruby")
         world.handlers = [handler]
         expect(deprecation.handler).to eq(handler)
-        expect(deprecation.behavior).to be_raise
+        expect(deprecation.behaviors).to match_array(["raise"])
+      end
+
+      it "ensures that raising is the last behavior if multiple behaviors" do
+        handler = Handler.new(environment: :all, behaviors: %w[raise log])
+        deprecation = Deprecation.new("message", source: "ruby")
+        world.handlers = [handler]
+        expect(deprecation.handler).to eq(handler)
+        expect(deprecation.behaviors).to eq(%w[log raise])
       end
     end
   end

@@ -1,25 +1,25 @@
 module WarningSigns
   class Handler
-    attr_accessor :behavior, :environments, :except, :only, :source
+    attr_accessor :environments, :except, :only, :source
 
     def self.from_hash(hash)
       new(**hash.symbolize_keys)
     end
 
     def initialize(
-      behavior: "ignore",
+      behavior: nil,
+      behaviors: [],
       environment: nil,
       except: [],
       only: [],
       source: "any",
       environments: []
     )
-      @behavior = behavior.to_s.downcase.inquiry
       @except = except
       @only = only
       @environments = environments.map { Environment.new(**_1.symbolize_keys) }
       if environment.present?
-        @environments << Environment.new(environment: environment, behavior: behavior)
+        @environments << Environment.new(environment: environment, behaviors: behaviors, behavior: behavior)
       end
       @source = source.to_s.downcase.inquiry
       raise InvalidHandlerError unless valid?

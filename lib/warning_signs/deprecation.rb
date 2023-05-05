@@ -11,18 +11,23 @@ module WarningSigns
       World.instance.handler_for(self)
     end
 
-    def behavior
-      handler&.environment&.behavior
+    # force raise to be the last element if it is present
+    def behaviors
+      result = (handler&.environment&.behaviors || []).inquiry
+      return result if !result.raise?
+      result = (result - ["raise"]) << "raise"
     end
 
     def invoke
-      case behavior
-      when "raise"
-        raise UnhandledDeprecationError, message
-      when "log"
-        Rails.logger.warn(message)
-      when "stderr"
-        $stderr.puts(message) # standard:disable Style/StderrPuts
+      behaviors.each do |behavior|
+        case behavior
+        when "raise"
+          raise UnhandledDeprecationError, message
+        when "log"
+          Rails.logger.warn(message)
+        when "stderr"
+          $stderr.puts(message) # standard:disable Style/StderrPuts
+        end
       end
     end
   end
