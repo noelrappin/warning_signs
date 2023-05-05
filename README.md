@@ -83,6 +83,21 @@ handlers:
     behavior: ignore
 ```
 
+A single environment can have multiple behaviors. This is helpful if you are,
+say dealing with end-to-end specs that swallow exceptions:
+
+```yaml
+handlers:
+  - environment: all
+    behaviors: 
+      - raise
+      - log
+```
+
+No matter what order you have the behaviors in, a `raise` behavior will be 
+executed last so that the other behaviors happen before the exception is 
+invoked.
+
 A common pattern is to focus only on specific deprecations and ignore others.
 For example, this setting file would raise on Ruby keyword argument 
 deprecations and ignore other ruby deprecations
