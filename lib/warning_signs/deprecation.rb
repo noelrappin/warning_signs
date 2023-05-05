@@ -15,7 +15,7 @@ module WarningSigns
     def behaviors
       result = (handler&.environment&.behaviors || []).inquiry
       return result if !result.raise?
-      result = (result - ["raise"]) << "raise"
+      (result - ["raise"]) << "raise"
     end
 
     def invoke

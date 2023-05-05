@@ -23,7 +23,7 @@ RSpec.describe "with a simple file that ignores everything" do
     it "writes to standard error" do
       expect { Warning.warn("This is a dummy warning") }
         .to output(/RUBY DEPRECATION WARNING: This is a dummy warning/)
-              .to_stderr
+        .to_stderr
     end
 
     it "logs" do
