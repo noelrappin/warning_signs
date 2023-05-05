@@ -11,7 +11,8 @@ module WarningSigns
     def caller_location
       caller_locations.find do |location|
         !location.to_s.include?("internal:warning") &&
-          !location.to_s.include?("warning_signs")
+          !location.to_s.include?("warning_signs") &&
+          !location.to_s.include?("rubygems")
       end
     end
   end
