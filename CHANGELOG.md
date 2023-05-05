@@ -1,6 +1,7 @@
 ## 0.3.0
 
 * Allow multiple behaviors in a single environment
+* Allow only and except matchers to be regular expressions
 
 ## 0.2.0
 

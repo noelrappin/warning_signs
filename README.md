@@ -114,7 +114,22 @@ handlers:
 ```
 
 Patterns are matched if the deprecation message contains the pattern as a 
-substring
+substring.
+
+The pattern can be a regular expression, denoted by using regular expression 
+syntax _inside_ the string in the YAML:
+
+```yaml
+handlers:
+  - source: ruby
+    only:
+      - "/Using .* argument/"
+    environment: all
+    behavior: log
+```
+
+The pattern inside the slashes is converted to a Ruby `Regexp` and patterns 
+are matched if the regexp and the deprecation warning message match.
 
 Another pattern is to have a list of ignored deprecations and then remove 
 messages one by one and manage them individually.

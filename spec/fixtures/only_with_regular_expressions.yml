@@ -1,0 +1,5 @@
+handlers:
+  - environment: all
+    only:
+      - "/Only .* one/"
+    behavior: raise

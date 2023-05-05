@@ -15,8 +15,8 @@ module WarningSigns
       source: "any",
       environments: []
     )
-      @except = except
-      @only = only
+      @except = except.map { Pattern.for(_1) }
+      @only = only.map { Pattern.for(_1) }
       @environments = environments.map { Environment.new(**_1.symbolize_keys) }
       if environment.present?
         @environments << Environment.new(environment: environment, behaviors: behaviors, behavior: behavior)
@@ -50,14 +50,14 @@ module WarningSigns
     def only_match?(message)
       return true if only.empty?
       only.any? do |only_pattern|
-        message.include?(only_pattern)
+        only_pattern.match?(message)
       end
     end
 
     def except_match?(message)
       return true if except.empty?
-      except.none? do |only_pattern|
-        message.include?(only_pattern)
+      except.none? do |except_pattern|
+        except_pattern.match?(message)
       end
     end
 

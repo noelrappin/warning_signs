@@ -39,10 +39,24 @@ module WarningSigns
         expect(handler.pattern_match?("Instance level methods are blowing up")).to be_falsey
       end
 
+      it "correctly matches regex in the only case" do
+        handler = Handler.new(only: ["/.* level methods/"])
+        expect(handler.pattern_match?("Class level methods are blowing up")).to be_truthy
+        expect(handler.pattern_match?("Instance level methods are blowing up")).to be_truthy
+        expect(handler.pattern_match?("Instance level variables are blowing up")).to be_falsey
+      end
+
       it "correctly matches strings in the except case" do
         handler = Handler.new(except: ["Class level methods"])
         expect(handler.pattern_match?("Class level methods are blowing up")).to be_falsey
         expect(handler.pattern_match?("Instance level methods are blowing up")).to be_truthy
+      end
+
+      it "correctly matches regex in the except case" do
+        handler = Handler.new(except: ["/.* level methods/"])
+        expect(handler.pattern_match?("Class level methods are blowing up")).to be_falsey
+        expect(handler.pattern_match?("Instance level methods are blowing up")).to be_falsey
+        expect(handler.pattern_match?("Instance level variables are falling down")).to be_truthy
       end
     end
   end
