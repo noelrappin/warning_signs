@@ -155,7 +155,7 @@ Ruby warnings can have an optional category, there are two predefined
 categories, `deprecated` and `experimental`. You can specify a handler to 
 match those categories based on an "only" or "except" matcher. If you want 
 to specially handle warnings that do not have a defined category, you can 
-refer to them as `blank`,
+refer to them as `blank`.
 
 This handler only handles Ruby warnings that are deprecated, other warnings 
 are ignored.
