@@ -1,3 +1,8 @@
+## 0.4.0
+
+* Allow handlers to take into account Ruby warning categories
+* Ruby warning message better handles Ruby warning categories
+
 ## 0.3.0
 
 * Allow multiple behaviors in a single environment

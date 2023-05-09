@@ -1,0 +1,6 @@
+handlers:
+  - environment: all
+    ruby_warnings:
+      only:
+        - deprecated
+    behavior: log

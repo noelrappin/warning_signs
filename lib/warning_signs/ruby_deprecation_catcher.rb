@@ -1,11 +1,16 @@
 module WarningSigns
   module RubyDeprecationCatcher
-    def warn(message)
-      Deprecation.new(augmented_message(message), source: "ruby").invoke
+    def warn(message, category: nil)
+      Deprecation.new(
+        augmented_message(message, category),
+        source: "ruby",
+        category: category
+      ).invoke
     end
 
-    def augmented_message(message)
-      "RUBY DEPRECATION WARNING: #{message} called from #{caller_location}"
+    def augmented_message(message, category)
+      category_part = category.present? ? " #{category.upcase}: " : ": "
+      "RUBY WARNING#{category_part}#{message} called from #{caller_location}"
     end
 
     def caller_location

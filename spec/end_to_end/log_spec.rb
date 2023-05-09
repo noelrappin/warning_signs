@@ -26,7 +26,7 @@ RSpec.describe "with a simple file that logs everything" do
     it "logs" do
       Warning.warn("This is a dummy warning")
       expect(Rails.logger.history).to have(1).element
-      expect(Rails.logger.history.first).to match("RUBY DEPRECATION WARNING: This is a dummy warning")
+      expect(Rails.logger.history.first).to match("RUBY WARNING: This is a dummy warning")
     end
 
     it "does not raise an error" do

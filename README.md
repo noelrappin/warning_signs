@@ -150,3 +150,37 @@ handlers:
       - environment: other
         behavior: log
 ```
+
+Ruby warnings can have an optional category, there are two predefined 
+categories, `deprecated` and `experimental`. You can specify a handler to 
+match those categories based on an "only" or "except" matcher. If you want 
+to specially handle warnings that do not have a defined category, you can 
+refer to them as `blank`,
+
+This handler only handles Ruby warnings that are deprecated, other warnings 
+are ignored.
+
+```yaml
+handlers:
+  - environment: all
+    ruby_warnings:
+      only:
+        - deprecated
+    behavior: log
+```
+
+This handler handles any Ruby warning with a category
+
+```yaml
+handlers:
+  - environment: all
+    ruby_warnings:
+      except:
+        - blank
+    behavior: log
+```
+
+## To Do:
+
+* write to standard out as a behavior
+* Ability to customize output message format

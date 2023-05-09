@@ -76,7 +76,7 @@ RSpec.describe "With an exception matcher" do
         Warning.warn("This is a dummy warning")
       rescue WarningSigns::UnhandledDeprecationError
       end
-      expect(Rails.logger.history.first).to match("DEPRECATION WARNING: This is a dummy warning")
+      expect(Rails.logger.history.first).to match("RUBY WARNING: This is a dummy warning")
     end
 
     it "raises an error" do

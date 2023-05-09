@@ -1,10 +1,11 @@
 module WarningSigns
   class Deprecation
-    attr_accessor :message, :source
+    attr_accessor :message, :source, :category
 
-    def initialize(message, source:)
+    def initialize(message, source:, category: nil)
       @message = message
       @source = source.to_s.downcase.inquiry
+      @category = category
     end
 
     def handler

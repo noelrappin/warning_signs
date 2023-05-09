@@ -22,14 +22,14 @@ RSpec.describe "with a simple file that ignores everything" do
   describe "Ruby behavior" do
     it "writes to standard error" do
       expect { Warning.warn("This is a dummy warning") }
-        .to output(/RUBY DEPRECATION WARNING: This is a dummy warning/)
+        .to output(/RUBY WARNING: This is a dummy warning/)
         .to_stderr
     end
 
     it "logs" do
       Warning.warn("This is a dummy warning")
       expect(Rails.logger.history).to have(1).element
-      expect(Rails.logger.history.first).to match("RUBY DEPRECATION WARNING: This is a dummy warning")
+      expect(Rails.logger.history.first).to match("RUBY WARNING: This is a dummy warning")
     end
 
     it "does not raise an error" do
@@ -40,14 +40,14 @@ RSpec.describe "with a simple file that ignores everything" do
   describe "Rails behavior" do
     it "writes to standard error" do
       expect { Warning.warn("This is a dummy warning") }
-        .to output(/RUBY DEPRECATION WARNING: This is a dummy warning/)
+        .to output(/RUBY WARNING: This is a dummy warning/)
         .to_stderr
     end
 
     it "logs" do
       Warning.warn("This is a dummy warning")
       expect(Rails.logger.history).to have(1).element
-      expect(Rails.logger.history.first).to match("RUBY DEPRECATION WARNING: This is a dummy warning")
+      expect(Rails.logger.history.first).to match("RUBY WARNING: This is a dummy warning")
     end
 
     it "does not raise an error" do
