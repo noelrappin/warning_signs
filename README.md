@@ -2,10 +2,10 @@
 
 The Warning Signs gem builds upon the ideas of the
 [Ruby Warning Gem](https://github.com/jeremyevans/ruby-warning) 
-and [Stop Ignoring Your Ruby and Rails Deprecations](https://blog.testdouble.com/posts/2023-04-24-stop-ignoring-your-ruby-and-rails-deprecations/).
+and [Stop ignoring your Rails (and Ruby) deprecations!](https://blog.testdouble.com/posts/2023-04-24-stop-ignoring-your-ruby-and-rails-deprecations/).
 
 The idea is to provide an easily-configurable way to manage deprecation 
-warnings from Ruby and Rails to support your upgrade tool.
+warnings from Ruby and Rails to support your upgrades.
 
 ## Installing Warning Signs
 
@@ -18,7 +18,7 @@ under some use cases, you may not need it in production.
 
 ## Using Warning Signs
 
-The Warning Signs  gem looks for a `.warning_sign.yml` file when the Rails 
+The Warning Signs gem looks for a `.warning_signs.yml` file when the Rails
 application starts. If it does not find the file, it will not load and the 
 processing of deprecations will be unaffected.
 
@@ -50,7 +50,7 @@ Handlers are matched in order. If no handler applies to a deprecation
 warning, Ruby warnings is ignored, Rails warnings are passed through
 the ActiveSupport notification mechanism.
 
-The following sample logs all deprecation warnings:
+The following example logs all deprecation warnings:
 
 ```yaml
 handlers:
@@ -155,7 +155,7 @@ Ruby warnings can have an optional category, there are two predefined
 categories, `deprecated` and `experimental`. You can specify a handler to 
 match those categories based on an "only" or "except" matcher. If you want 
 to specially handle warnings that do not have a defined category, you can 
-refer to them as `blank`,
+refer to them as `blank`.
 
 This handler only handles Ruby warnings that are deprecated, other warnings 
 are ignored.
