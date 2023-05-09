@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    warning_signs (0.3.0)
+    warning_signs (0.4.0)
       awesome_print
       railties
 

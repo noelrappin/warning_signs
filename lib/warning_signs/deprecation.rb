@@ -15,7 +15,7 @@ module WarningSigns
     # force raise to be the last element if it is present
     def behaviors
       result = (handler&.environment&.behaviors || []).inquiry
-      return result if !result.raise?
+      return result unless result.raise?
       (result - ["raise"]) << "raise"
     end
 
