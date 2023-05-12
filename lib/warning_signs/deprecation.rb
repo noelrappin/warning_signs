@@ -33,7 +33,7 @@ module WarningSigns
           raise UnhandledDeprecationError, message
         when "log"
           Rails.logger.warn(message)
-          backtrace_lines.split("\n").each { Rails.logger.warn(_1)}
+          backtrace_lines.split("\n").each { Rails.logger.warn(_1) }
         when "stderr"
           $stderr.puts(message) # standard:disable Style/StderrPuts
           $stderr.puts(backtrace_lines) # standard:disable Style/StderrPuts
