@@ -2,6 +2,8 @@ module WarningSigns
   module RubyDeprecationCatcher
     include CallerLocationHelper
     def warn(message, category: nil)
+      ap caller_locations
+      ap caller_location_start
       Deprecation.new(
         augmented_message(message, category),
         source: "ruby",
