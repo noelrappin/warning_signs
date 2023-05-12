@@ -1,0 +1,4 @@
+handlers:
+  - environment: all
+    behavior: log
+    backtrace_lines: 3

@@ -1,3 +1,7 @@
+## 0.5.0
+
+* Allow handlers to print out backtraces for log, stdout, and stderr behaviors
+
 ## 0.4.0
 
 * Allow handlers to take into account Ruby warning categories

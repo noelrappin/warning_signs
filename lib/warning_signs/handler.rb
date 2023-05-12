@@ -1,6 +1,7 @@
 module WarningSigns
   class Handler
-    attr_accessor :environments, :except, :only, :source, :category_matcher
+    attr_accessor :environments, :except, :only, :source,
+      :category_matcher, :backtrace_lines
 
     def self.from_hash(hash)
       new(**hash.symbolize_keys)
@@ -14,7 +15,8 @@ module WarningSigns
       only: [],
       source: "any",
       environments: [],
-      ruby_warnings: {}
+      ruby_warnings: {},
+      backtrace_lines: 0
     )
       @except = except.map { Pattern.for(_1) }
       @only = only.map { Pattern.for(_1) }
@@ -24,6 +26,7 @@ module WarningSigns
       end
       @source = source.to_s.downcase.inquiry
       @category_matcher = RubyCategoryMatcher.new(**ruby_warnings.symbolize_keys)
+      @backtrace_lines = backtrace_lines
       raise InvalidHandlerError unless valid?
     end
 

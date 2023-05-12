@@ -1,0 +1,4 @@
+handlers:
+  - environment: all
+    behavior: stderr
+    backtrace_lines: 3

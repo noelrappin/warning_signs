@@ -98,6 +98,20 @@ No matter what order you have the behaviors in, a `raise` behavior will be
 executed last so that the other behaviors happen before the exception is 
 invoked.
 
+The attribute `backtrace_lines` can be used to print extra lines of the 
+backtrace to the output for the `log`, `stderr`, and `stdout` behaviors. 
+Currently, it's one attribute that applies to all behaviors. This can be 
+useful, especially if the direct cause of the issue is in a gem.
+
+```yaml
+handlers:
+  - environment: all
+    backtrace_lines: 5
+    behaviors: 
+      - raise
+      - log
+```
+
 A common pattern is to focus only on specific deprecations and ignore others.
 For example, this setting file would raise on Ruby keyword argument 
 deprecations and ignore other ruby deprecations
@@ -182,5 +196,4 @@ handlers:
 
 ## To Do:
 
-* write to standard out as a behavior
 * Ability to customize output message format
