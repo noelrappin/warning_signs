@@ -4,6 +4,7 @@ module WarningSigns
     def warn(message, category: nil)
       p "RubyDeprecationCatcher.warn"
       p caller_location_start
+      p caller_locations[caller_location_start]
       Deprecation.new(
         augmented_message(message, category),
         source: "ruby",
