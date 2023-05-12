@@ -6,7 +6,7 @@ module WarningSigns
           !location.to_s.include?("warning_signs") &&
           !location.to_s.include?("rubygems") &&
           !location.to_s.include?("/gems")
-      end
+      end || 0
     end
   end
 end
