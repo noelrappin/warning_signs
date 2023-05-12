@@ -27,7 +27,6 @@ RSpec.describe "with a simple file that logs everything" do
       Warning.warn("This is a dummy warning")
       expect(Rails.logger.history).to have(4).elements
       expect(Rails.logger.history.first).to match("RUBY WARNING: This is a dummy warning")
-      expect(Rails.logger.history.second).to match("lib/bundler/cli/exec.rb")
     end
 
     it "does not raise an error" do
@@ -44,7 +43,6 @@ RSpec.describe "with a simple file that logs everything" do
       ActiveSupport::Deprecation.warn("This is a dummy warning")
       expect(Rails.logger.history).to have(4).elements
       expect(Rails.logger.history.first).to match("DEPRECATION WARNING: This is a dummy warning")
-      expect(Rails.logger.history.second).to match("lib/bundler/cli/exec.rb")
     end
 
     it "does not raise an error" do

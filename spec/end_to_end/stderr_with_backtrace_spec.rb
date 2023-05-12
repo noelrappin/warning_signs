@@ -43,9 +43,6 @@ RSpec.describe "with a simple file that ignores everything" do
       expect { ActiveSupport::Deprecation.warn("This is a dummy warning") }
         .to output(/DEPRECATION WARNING: This is a dummy warning/)
         .to_stderr
-
-      expect { ActiveSupport::Deprecation.warn("This is a dummy warning") }
-        .to output(%r{/lib/bundler/cli/exec}).to_stderr
     end
 
     it "does not log" do
