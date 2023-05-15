@@ -7,7 +7,7 @@ module WarningSigns
       Deprecation.new(
         event.payload[:message],
         source: "rails",
-        backtrace: caller_locations[caller_location_start..]
+        backtrace: caller_locations_filtered
       ).invoke
     end
   end

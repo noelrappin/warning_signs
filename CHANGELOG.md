@@ -1,3 +1,7 @@
+## 0.5.1
+
+* Better filtering of backtraces 
+
 ## 0.5.0
 
 * Allow handlers to print out backtraces for log, stdout, and stderr behaviors

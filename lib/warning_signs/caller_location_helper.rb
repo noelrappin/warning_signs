@@ -1,9 +1,9 @@
 module WarningSigns
   module CallerLocationHelper
-    def caller_location_start
-      caller_locations.find_index do |location|
-        !ignore_line(location.to_s)
-      end || 0
+    def caller_locations_filtered
+      caller_locations.reject do |location|
+        ignore_line(location.to_s)
+      end
     end
 
     def ignore_line(line)

@@ -6,13 +6,13 @@ module WarningSigns
         augmented_message(message, category),
         source: "ruby",
         category: category,
-        backtrace: caller_locations[caller_location_start..]
+        backtrace: caller_locations_filtered
       ).invoke
     end
 
     def augmented_message(message, category)
       category_part = category.present? ? " #{category.upcase}: " : ": "
-      "RUBY WARNING#{category_part}#{message} called from #{caller_locations[caller_location_start]}"
+      "RUBY WARNING#{category_part}#{message} called from #{caller_locations_filtered.first}"
     end
   end
 end
