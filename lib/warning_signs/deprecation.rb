@@ -23,7 +23,7 @@ module WarningSigns
     def backtrace_lines
       lines = handler&.backtrace_lines || 0
       return "" if lines.zero?
-      backtrace[1..lines].join("\n")
+      (backtrace[1..lines] || []).join("\n")
     end
 
     def invoke
