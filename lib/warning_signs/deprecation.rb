@@ -2,11 +2,11 @@ module WarningSigns
   class Deprecation
     attr_accessor :message, :source, :category, :backtrace
 
-    def initialize(message, source:, category: nil, backtrace: nil)
+    def initialize(message, source:, category: nil, backtrace: [])
       @message = message
       @source = source.to_s.downcase.inquiry
       @category = category
-      @backtrace = backtrace
+      @backtrace = backtrace || []
     end
 
     def handler
