@@ -13,6 +13,10 @@ module WarningSigns
       World.instance.handler_for(self)
     end
 
+    def message_formatter
+      handler.message_formatter
+    end
+
     # force raise to be the last element if it is present
     def behaviors
       result = (handler&.environment&.behaviors || []).inquiry
@@ -20,27 +24,14 @@ module WarningSigns
       (result - ["raise"]) << "raise"
     end
 
-    def backtrace_lines
-      lines = handler&.backtrace_lines || 0
-      return "" if lines.zero?
-      (backtrace[1..lines] || []).join("\n")
-    end
-
     def invoke
-      behaviors.each do |behavior|
-        case behavior
-        when "raise"
-          raise UnhandledDeprecationError, message
-        when "log"
-          Rails.logger.warn(message)
-          backtrace_lines.split("\n").each { Rails.logger.warn(_1) }
-        when "stderr"
-          $stderr.puts(message) # standard:disable Style/StderrPuts
-          $stderr.puts(backtrace_lines) # standard:disable Style/StderrPuts
-        when "stdout"
-          $stdout.puts(message) # standard:disable Style/StdoutPuts
-          $stdout.puts(backtrace_lines) # standard:disable Style/StdoutPuts
-        end
+      behaviors.each do |behavior_type|
+        Behavior::Base.for(
+          behavior_type,
+          message,
+          backtrace,
+          message_formatter
+        ).emit
       end
     end
   end

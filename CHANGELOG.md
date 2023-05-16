@@ -1,3 +1,8 @@
+## 0.6.0
+
+* Allow for format options in log
+* Allow for filter options in backtrace
+
 ## 0.5.1
 
 * Better filtering of backtraces 

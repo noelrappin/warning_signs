@@ -6,7 +6,7 @@ module WarningSigns
         augmented_message(message, category),
         source: "ruby",
         category: category,
-        backtrace: caller_locations_filtered
+        backtrace: caller_locations
       ).invoke
     end
 

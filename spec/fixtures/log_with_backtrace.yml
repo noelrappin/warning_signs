@@ -1,4 +1,5 @@
 handlers:
   - environment: all
     behavior: log
-    backtrace_lines: 3
+    message_formatter:
+      backtrace_lines: 3
