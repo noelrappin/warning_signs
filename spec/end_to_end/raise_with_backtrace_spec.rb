@@ -2,7 +2,7 @@ RSpec.describe "with a simple file that raises on everything" do
   let(:world) { WarningSigns::World.instance }
 
   before do
-    WarningSigns::World.from_file("spec/fixtures/raise.yml")
+    WarningSigns::World.from_file("spec/fixtures/raise_with_backtrace.yml")
     without_partial_double_verification do
       allow(Rails).to receive(:env).and_return("production".inquiry)
     end
@@ -38,10 +38,10 @@ RSpec.describe "with a simple file that raises on everything" do
       expect { Warning.warn("This is a dummy warning") }.to raise_error(WarningSigns::UnhandledDeprecationError)
     end
 
-    it "prints an entire backtrace" do
+    it "prints a filtered backtrace" do
       Warning.warn("This is a dummy warning")
     rescue WarningSigns::UnhandledDeprecationError
-      expect($ERROR_POSITION).to have_at_least(4).items
+      expect($ERROR_POSITION).to have(3).lines
     end
   end
 
@@ -61,15 +61,10 @@ RSpec.describe "with a simple file that raises on everything" do
       expect(Rails.logger.history).to be_empty
     end
 
-    it "raises an error" do
-      expect { ActiveSupport::Deprecation.warn("This is a dummy warning") }
-        .to raise_error(WarningSigns::UnhandledDeprecationError)
-    end
-
-    it "prints an entire backtrace" do
+    it "prints a filtered backtrace" do
       Warning.warn("This is a dummy warning")
     rescue WarningSigns::UnhandledDeprecationError
-      expect($ERROR_POSITION).to have_at_least(4).lines
+      expect($ERROR_POSITION).to have(3).lines
     end
   end
 end

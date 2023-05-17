@@ -1,8 +1,13 @@
 module WarningSigns
   module Behavior
     class Raise < Base
+      def filtered_backtrace
+        return backtrace if message_formatter.backtrace_lines.zero?
+        message_formatter.filtered_backtrace(backtrace)
+      end
+
       def emit
-        raise UnhandledDeprecationError, message
+        raise UnhandledDeprecationError, message, filtered_backtrace[1..].map(&:to_s)
       end
     end
   end

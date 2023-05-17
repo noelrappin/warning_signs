@@ -1,0 +1,5 @@
+handlers:
+  - environment: all
+    behavior: raise
+    message_formatter:
+      backtrace_lines: 3
