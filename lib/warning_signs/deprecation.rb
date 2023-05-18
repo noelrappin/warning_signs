@@ -13,8 +13,8 @@ module WarningSigns
       World.instance.handler_for(self)
     end
 
-    def message_formatter
-      handler.message_formatter
+    def message_formatter_for(behavior)
+      handler.message_formatter_for(behavior)
     end
 
     # force raise to be the last element if it is present
@@ -30,7 +30,7 @@ module WarningSigns
           behavior_type,
           message,
           backtrace,
-          message_formatter
+          message_formatter_for(behavior_type)
         ).emit
       end
     end

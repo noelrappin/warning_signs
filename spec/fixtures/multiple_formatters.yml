@@ -1,0 +1,17 @@
+handlers:
+  - environment: all
+    behaviors:
+      - log
+      - stderr
+      - raise
+    message_formatters:
+      - backtrace_lines: 3
+        format: hash
+        behaviors:
+          only:
+            - log
+      - backtrace_lines: 3
+        format: text
+        behaviors:
+          only:
+            - stderr
