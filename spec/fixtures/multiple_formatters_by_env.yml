@@ -1,0 +1,15 @@
+handlers:
+  - environment: all
+    behaviors:
+      - log
+    message_formatters:
+      - backtrace_lines: 3
+        format: hash
+        environments:
+          only:
+            - production
+      - backtrace_lines: 3
+        format: yaml
+        environments:
+          only:
+            - development

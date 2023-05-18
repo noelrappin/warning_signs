@@ -2,7 +2,7 @@ module WarningSigns
   module MessageFormatter
     class Base
       include CallerLocationHelper
-      attr_reader :backtrace_lines, :behaviors
+      attr_reader :backtrace_lines, :behaviors, :environments
 
       def self.for(**args)
         args = args.symbolize_keys
@@ -11,9 +11,10 @@ module WarningSigns
         class_name.constantize.new(**args)
       end
 
-      def initialize(backtrace_lines: 0, behaviors: {})
+      def initialize(backtrace_lines: 0, behaviors: {}, environments: {})
         @backtrace_lines = backtrace_lines
         @behaviors = OnlyExcept.new(**behaviors.symbolize_keys)
+        @environments = OnlyExcept.new(**environments.symbolize_keys)
       end
 
       def format_message(message, backtrace)

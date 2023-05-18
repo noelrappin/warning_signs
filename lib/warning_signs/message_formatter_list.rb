@@ -17,7 +17,8 @@ module WarningSigns
 
     def behavior_match(behavior)
       message_formatters.find do
-        _1.behaviors.only_except_match?(behavior)
+        _1.behaviors.only_except_match?(behavior) &&
+          _1.environments.only_except_match?(Rails.env)
       end
     end
   end

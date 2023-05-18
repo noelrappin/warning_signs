@@ -1,7 +1,8 @@
 ## 0.6.0
 
-* Allow for format options in log
+* Allow for format options in messages
 * Allow for filter options in backtrace
+* Allow for multiple output behaviors based on environment
 
 ## 0.5.1
 
