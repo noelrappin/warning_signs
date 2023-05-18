@@ -22,11 +22,17 @@ module WarningSigns
       @only = only.map { Pattern.for(_1) }
       @environments = environments.map { Environment.new(**_1.symbolize_keys) }
       if environment.present?
-        @environments << Environment.new(environment: environment, behaviors: behaviors, behavior: behavior)
+        @environments << Environment.new(
+          environment: environment,
+          behaviors: behaviors,
+          behavior: behavior
+        )
       end
       @source = source.to_s.downcase.inquiry
       @category_matcher = RubyCategoryMatcher.new(**ruby_warnings.symbolize_keys)
-      @message_formatter = MessageFormatter.new(**message_formatter.symbolize_keys)
+      @message_formatter = MessageFormatter::Base.for(
+        **message_formatter.symbolize_keys
+      )
       raise InvalidHandlerError unless valid?
     end
 

@@ -1,0 +1,6 @@
+handlers:
+  - environment: all
+    behavior: log
+    message_formatter:
+      backtrace_lines: 3
+      format: hash

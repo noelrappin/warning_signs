@@ -3,8 +3,7 @@ module WarningSigns
   module Behavior
     class Stdout < Base
       def emit
-        $stdout.puts(message)
-        $stdout.puts(filtered_backtrace_lines)
+        formatted_message.each { $stdout.puts(_1) }
       end
     end
   end

@@ -7,7 +7,9 @@ module WarningSigns
       end
 
       def emit
-        raise UnhandledDeprecationError, message, filtered_backtrace[1..].map(&:to_s)
+        raise UnhandledDeprecationError,
+          formatted_message.first,
+          filtered_backtrace[1..].map(&:to_s)
       end
     end
   end

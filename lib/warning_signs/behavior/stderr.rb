@@ -3,8 +3,7 @@ module WarningSigns
   module Behavior
     class Stderr < Base
       def emit
-        $stderr.puts(message)
-        $stderr.puts(filtered_backtrace_lines)
+        formatted_message.each { $stderr.puts(_1) }
       end
     end
   end

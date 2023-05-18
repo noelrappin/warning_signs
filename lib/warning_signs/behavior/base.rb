@@ -14,8 +14,10 @@ module WarningSigns
         @message_formatter = message_formatter
       end
 
-      def filtered_backtrace_lines
-        message_formatter.filtered_backtrace_lines(backtrace)
+      def formatted_message
+        result = message_formatter.format_message(message, backtrace)
+        result = [result] unless result.is_a?(Array)
+        result
       end
 
       def emit
