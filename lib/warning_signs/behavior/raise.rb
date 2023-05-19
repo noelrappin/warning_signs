@@ -2,7 +2,6 @@ module WarningSigns
   module Behavior
     class Raise < Base
       def filtered_backtrace
-        ap backtrace
         return backtrace if message_formatter.backtrace_lines.zero?
         message_formatter.filtered_backtrace(backtrace)
       end

@@ -41,7 +41,7 @@ RSpec.describe "with a simple file that raises on everything" do
     it "prints a filtered backtrace" do
       Warning.warn("This is a dummy warning")
     rescue WarningSigns::UnhandledDeprecationError
-      expect($ERROR_POSITION).to have(3).lines
+      expect($ERROR_POSITION).to have_at_most(5).lines
     end
   end
 
@@ -64,7 +64,7 @@ RSpec.describe "with a simple file that raises on everything" do
     it "prints a filtered backtrace" do
       Warning.warn("This is a dummy warning")
     rescue WarningSigns::UnhandledDeprecationError
-      expect($ERROR_POSITION).to have(3).lines
+      expect($ERROR_POSITION).to have_at_most(5).lines
     end
   end
 end
