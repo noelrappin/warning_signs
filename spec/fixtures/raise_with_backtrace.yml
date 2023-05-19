@@ -3,3 +3,4 @@ handlers:
     behavior: raise
     message_formatter:
       backtrace_lines: 3
+      filter_backtraces: filter_internals

@@ -9,7 +9,8 @@ module WarningSigns
     def ignore_line(line, filter_backtraces: "yes".inquiry)
       return false if filter_backtraces.no?
       partial_result = line.include?("<internal:") ||
-        line.include?("warning_signs/lib")
+        line.include?("warning_signs/lib") ||
+        line.include?("warning_signs/spec")
       return partial_result if filter_backtraces.filter_internals?
       partial_result ||
         line.include?("rubygems") ||
