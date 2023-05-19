@@ -1,0 +1,23 @@
+handlers:
+  - environment: all
+    behaviors:
+      - log
+    message_formatters:
+      - backtrace_lines: 3
+        format: text
+        filter_backtraces: yes
+        environments:
+          only:
+            - production
+      - backtrace_lines: 3
+        format: text
+        filter_backtraces: no
+        environments:
+          only:
+            - development
+      - backtrace_lines: 3
+        format: text
+        filter_backtraces: filter_internals
+        environments:
+          only:
+            - test

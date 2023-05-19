@@ -1,9 +1,9 @@
 module WarningSigns
   class CallerLocationHelperTester
-    include CallerLocationHelper
+    include CallerHelper
   end
 
-  RSpec.describe CallerLocationHelper do
+  RSpec.describe CallerHelper do
     let(:tester) { CallerLocationHelperTester.new }
 
     it "can find the start of the caller location" do

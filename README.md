@@ -26,6 +26,8 @@ You should remove any environment settings in Rails that are managing
 `config.active_support.deprecation`, or at least those that are not
 set to `:notify` -- use WarningSigns to handle those settings...
 
+### Handlers
+
 Warning Signs  allows you to define _handlers_ in the YAML file. A handler 
 consists of the following:
 
@@ -58,6 +60,8 @@ handlers:
     behavior: log
 ```
 
+### Environments
+
 Multiple environments need to be handled in a nested list. This example 
 raises exceptions in the test environment, but logs in other environments
 
@@ -69,6 +73,8 @@ handlers:
       - environment: other
         behavior: log
 ```
+
+### Sources
 
 This example raises exceptions for Ruby deprecations, but ignores Rails 
 deprecations:
@@ -98,19 +104,95 @@ No matter what order you have the behaviors in, a `raise` behavior will be
 executed last so that the other behaviors happen before the exception is 
 invoked.
 
-The attribute `backtrace_lines` can be used to print extra lines of the 
-backtrace to the output for the `log`, `stderr`, and `stdout` behaviors. 
-Currently, it's one attribute that applies to all behaviors. This can be 
-useful, especially if the direct cause of the issue is in a gem.
+### Message Formatters
+
+Message formatters can affect how and what data is passed to the output 
+channel. You can define one handler:
 
 ```yaml
 handlers:
   - environment: all
-    backtrace_lines: 5
-    behaviors: 
-      - raise
-      - log
+    behavior: log
+    message_formatter:
+      backtrace_lines: 3
+      format: hash
+      filter_backtrace: filter_internals
 ```
+
+There are a few attributes of message formatter that you can set
+
+* `backtrace_lines` is the number of filtered lines of backtrace, after the 
+  current line, that are sent to the output. The default is zero. (For 
+  raising exceptions, the default is the entire backtrace).
+* `format` can be `text`, `json`, `hash`, or `yaml`. Non text formats are 
+  hashes with keys `message` and `backtrace`, with the `json` and `yaml` 
+  formats converted to strings in those formats.
+* `filter_backtrace` has three settings. The default is `yes`, which filters 
+  out Ruby internals, references to warning signs itself, and lines from 
+  gems. To not filter at all, say `no`. To filter internals but not gems, 
+  say `filter_internals`.
+
+If a message formatter is not specified, the default is a hash with zero 
+backtrace lines.
+
+Or you can define multiple message formatters. These can separate format 
+based on output behavior.
+
+In this example, `log` behaviors are sent in hash format, while `stderr` 
+behaviors are sent in `text` format. Instead of an `only` list, an `except` 
+list can be specified.
+
+```yaml
+handlers:
+  - environment: all
+    behaviors:
+      - log
+      - stderr
+      - raise
+    message_formatters:
+      - backtrace_lines: 3
+        format: hash
+        behaviors:
+          only:
+            - log
+      - backtrace_lines: 3
+        format: text
+        behaviors:
+          only:
+            - stderr
+```
+
+You can also define multiple message formatters based on environment.
+
+In this case, logs in production get hash format, while logs in development 
+get yaml format.
+
+```yaml
+handlers:
+  - environment: all
+    behaviors:
+      - log
+    message_formatters:
+      - backtrace_lines: 3
+        format: hash
+        environments:
+          only:
+            - production
+      - backtrace_lines: 3
+        format: yaml
+        environments:
+          only:
+            - development
+```
+
+Environments can also be listed negatively with `except`.
+
+Environment and behavior matching can be used together.
+
+If no message formatter matches a given message, the default is text format 
+with no backtrace lines.
+
+### Pattern Matching
 
 A common pattern is to focus only on specific deprecations and ignore others.
 For example, this setting file would raise on Ruby keyword argument 
@@ -165,6 +247,8 @@ handlers:
         behavior: log
 ```
 
+### Ruby Warning Types
+
 Ruby warnings can have an optional category, there are two predefined 
 categories, `deprecated` and `experimental`. You can specify a handler to 
 match those categories based on an "only" or "except" matcher. If you want 
@@ -193,7 +277,3 @@ handlers:
         - blank
     behavior: log
 ```
-
-## To Do:
-
-* Ability to customize output message format

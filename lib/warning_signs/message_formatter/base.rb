@@ -1,8 +1,8 @@
 module WarningSigns
   module MessageFormatter
     class Base
-      include CallerLocationHelper
-      attr_reader :backtrace_lines, :behaviors, :environments
+      include CallerHelper
+      attr_reader :backtrace_lines, :behaviors, :environments, :filter_backtraces
 
       def self.for(**args)
         args = args.symbolize_keys
@@ -11,10 +11,11 @@ module WarningSigns
         class_name.constantize.new(**args)
       end
 
-      def initialize(backtrace_lines: 0, behaviors: {}, environments: {})
+      def initialize(backtrace_lines: 0, behaviors: {}, environments: {}, filter_backtraces: "yes")
         @backtrace_lines = backtrace_lines
         @behaviors = OnlyExcept.new(**behaviors.symbolize_keys)
         @environments = OnlyExcept.new(**environments.symbolize_keys)
+        @filter_backtraces = filter_backtraces.to_s.downcase.inquiry
       end
 
       def format_message(message, backtrace)
@@ -24,7 +25,7 @@ module WarningSigns
       def filtered_backtrace(backtrace)
         return [] if backtrace.nil?
         result = backtrace.reject do |location|
-          ignore_line(location.to_s)
+          ignore_line(location.to_s, filter_backtraces: filter_backtraces)
         end
         result.empty? ? backtrace : result
       end
