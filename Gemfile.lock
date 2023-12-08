@@ -3,7 +3,7 @@ PATH
   specs:
     warning_signs (0.6.0)
       awesome_print
-      railties
+      railties (<= 7.1.0)
 
 GEM
   remote: https://rubygems.org/
