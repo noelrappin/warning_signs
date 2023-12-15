@@ -14,8 +14,6 @@ module WarningSigns
   SAMPLE_CONSTANT = "foobar"
 
   class InvalidHandlerError < StandardError; end
-
-  class UnhandledDeprecationError < StandardError; end
 end
 
 loader.eager_load

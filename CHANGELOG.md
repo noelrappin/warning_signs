@@ -1,3 +1,8 @@
+## 0.6.1 Dec 15, 2023
+
+* Warning Signs error message makes it clearer that Warning Signs is 
+  triggering the error
+
 ## 0.6.0
 
 * Allow for format options in messages
