@@ -79,7 +79,7 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rainbow (3.1.1)
-    rake (12.3.3)
+    rake (13.1.0)
     regexp_parser (2.9.0)
     rexml (3.2.6)
     rspec (3.12.0)
@@ -150,12 +150,12 @@ DEPENDENCIES
   awesome_print
   pry-byebug
   railties (< 7.1.0)
-  rake (~> 12.0)
-  rspec (~> 3.4)
+  rake
+  rspec
   rspec-collection_matchers
   rspec_junit_formatter
   simplecov (~> 0.17.0)
-  standard (>= 1.0)
+  standard
   warning_signs!
   yard
 

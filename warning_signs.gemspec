@@ -30,11 +30,11 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "pry-byebug"
-  spec.add_development_dependency "rake", "~> 12.0"
-  spec.add_development_dependency "rspec", "~> 3.4"
+  spec.add_development_dependency "rake"
+  spec.add_development_dependency "rspec"
   spec.add_development_dependency "rspec-collection_matchers"
   spec.add_development_dependency "rspec_junit_formatter"
-  spec.add_development_dependency "standard", ">= 1.0"
+  spec.add_development_dependency "standard"
   spec.add_development_dependency "simplecov", "~> 0.17.0"
   spec.add_development_dependency "yard"
 end
