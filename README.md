@@ -16,8 +16,6 @@ To install Warning Signs add
 to your gemfile, you will most likely want it to be in all environments, but 
 under some use cases, you may not need it in production.
 
-### Rails 7.1 is not supported yet, it changed intenral deprecation objects
-
 ## Using Warning Signs
 
 The Warning Signs gem looks for a `.warning_signs.yml` file when the Rails
