@@ -2,5 +2,6 @@
 
 source "https://rubygems.org"
 
-# Specify your gem's dependencies in warning_signs.gemspec
 gemspec
+gem "awesome_print"
+gem "railties", "< 7.1.0"
