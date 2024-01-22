@@ -20,7 +20,7 @@ RSpec.describe "with a simple file that logs everything" do
       without_partial_double_verification do
         allow(Rails).to receive(:env).and_return("production".inquiry)
       end
-      ActiveSupport::Deprecation.warn("This is a dummy warning")
+      RailsWarningEmitter.emit("This is a dummy warning")
       expect(Rails.logger.history).to have(4).elements
       expect(Rails.logger.history.first).to match("DEPRECATION WARNING: This is a dummy warning")
     end
@@ -29,7 +29,7 @@ RSpec.describe "with a simple file that logs everything" do
       without_partial_double_verification do
         allow(Rails).to receive(:env).and_return("development".inquiry)
       end
-      ActiveSupport::Deprecation.warn("This is a dummy warning")
+      RailsWarningEmitter.emit("This is a dummy warning")
       expect(Rails.logger.history).to have(4).elements
       expect(Rails.logger.history.first).to match("DEPRECATION WARNING: This is a dummy warning")
     end
@@ -38,7 +38,7 @@ RSpec.describe "with a simple file that logs everything" do
       without_partial_double_verification do
         allow(Rails).to receive(:env).and_return("test".inquiry)
       end
-      ActiveSupport::Deprecation.warn("This is a dummy warning")
+      RailsWarningEmitter.emit("This is a dummy warning")
       expect(Rails.logger.history).to have(4).elements
       expect(Rails.logger.history.first).to match("DEPRECATION WARNING: This is a dummy warning")
     end

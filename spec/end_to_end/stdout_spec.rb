@@ -2,10 +2,10 @@ RSpec.describe "with a simple file that ignores everything", :block_stdout do
   let(:world) { WarningSigns::World.instance }
 
   before do
-    WarningSigns::World.from_file("spec/fixtures/stdout.yml")
     without_partial_double_verification do
       allow(Rails).to receive(:env).and_return("production".inquiry)
     end
+    WarningSigns::World.from_file("spec/fixtures/stdout.yml")
   end
 
   describe "initialization" do
@@ -20,7 +20,7 @@ RSpec.describe "with a simple file that ignores everything", :block_stdout do
 
   describe "Ruby behavior" do
     it "does not write to standard error" do
-      expect { ActiveSupport::Deprecation.warn("This is a dummy warning") }.not_to output.to_stderr
+      expect { RailsWarningEmitter.emit("This is a dummy warning") }.not_to output.to_stderr
     end
 
     it "writes to standard out" do
@@ -41,22 +41,22 @@ RSpec.describe "with a simple file that ignores everything", :block_stdout do
 
   describe "Rails behavior" do
     it "does not write to standard error" do
-      expect { ActiveSupport::Deprecation.warn("This is a dummy warning") }.not_to output.to_stderr
+      expect { RailsWarningEmitter.emit("This is a dummy warning") }.not_to output.to_stderr
     end
 
     it "writes to standard out" do
-      expect { ActiveSupport::Deprecation.warn("This is a dummy warning") }
+      expect { RailsWarningEmitter.emit("This is a dummy warning") }
         .to output(/DEPRECATION WARNING: This is a dummy warning/)
         .to_stdout
     end
 
     it "does not log" do
-      ActiveSupport::Deprecation.warn("This is a dummy warning")
+      RailsWarningEmitter.emit("This is a dummy warning")
       expect(Rails.logger.history).to be_empty
     end
 
     it "does not raise an error" do
-      expect { ActiveSupport::Deprecation.warn("This is a dummy warning") }.not_to raise_error
+      expect { RailsWarningEmitter.emit("This is a dummy warning") }.not_to raise_error
     end
   end
 end

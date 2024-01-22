@@ -2,10 +2,10 @@ RSpec.describe "with a simple file that logs everything" do
   let(:world) { WarningSigns::World.instance }
 
   before do
-    WarningSigns::World.from_file("spec/fixtures/multiple_formatters.yml")
     without_partial_double_verification do
       allow(Rails).to receive(:env).and_return("production".inquiry)
     end
+    WarningSigns::World.from_file("spec/fixtures/multiple_formatters.yml")
   end
 
   describe "initialization" do
@@ -29,7 +29,7 @@ RSpec.describe "with a simple file that logs everything" do
     end
 
     it "logs" do
-      ActiveSupport::Deprecation.warn("This is a dummy warning")
+      RailsWarningEmitter.emit("This is a dummy warning")
     rescue WarningSigns::UnhandledDeprecationError
       expect(Rails.logger.history.first).to match(
         {

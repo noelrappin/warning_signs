@@ -2,10 +2,10 @@ RSpec.describe "with a simple file that logs everything" do
   let(:world) { WarningSigns::World.instance }
 
   before do
-    WarningSigns::World.from_file("spec/fixtures/log.yml")
     without_partial_double_verification do
       allow(Rails).to receive(:env).and_return("production".inquiry)
     end
+    WarningSigns::World.from_file("spec/fixtures/log.yml")
   end
 
   describe "initialization" do
@@ -36,17 +36,17 @@ RSpec.describe "with a simple file that logs everything" do
 
   describe "Rails behavior" do
     it "does not write to standard error" do
-      expect { ActiveSupport::Deprecation.warn("This is a dummy warning") }.not_to output.to_stderr
+      expect { RailsWarningEmitter.emit("This is a dummy warning") }.not_to output.to_stderr
     end
 
     it "logs" do
-      ActiveSupport::Deprecation.warn("This is a dummy warning")
+      RailsWarningEmitter.emit("This is a dummy warning")
       expect(Rails.logger.history).to have(1).element
       expect(Rails.logger.history.first).to match("DEPRECATION WARNING: This is a dummy warning")
     end
 
     it "does not raise an error" do
-      expect { ActiveSupport::Deprecation.warn("This is a dummy warning") }.not_to raise_error
+      expect { RailsWarningEmitter.emit("This is a dummy warning") }.not_to raise_error
     end
   end
 end

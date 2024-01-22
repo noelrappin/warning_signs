@@ -2,10 +2,10 @@ RSpec.describe "with a simple file that raises on everything" do
   let(:world) { WarningSigns::World.instance }
 
   before do
-    WarningSigns::World.from_file("spec/fixtures/raise.yml")
     without_partial_double_verification do
       allow(Rails).to receive(:env).and_return("production".inquiry)
     end
+    WarningSigns::World.from_file("spec/fixtures/raise.yml")
   end
 
   describe "initialization" do
@@ -48,7 +48,7 @@ RSpec.describe "with a simple file that raises on everything" do
   describe "Rails behavior" do
     it "does not write to standard error" do
       expect do
-        ActiveSupport::Deprecation.warn("This is a dummy warning")
+        RailsWarningEmitter.emit("This is a dummy warning")
       rescue WarningSigns::UnhandledDeprecationError
       end.not_to output.to_stderr
     end
@@ -62,7 +62,7 @@ RSpec.describe "with a simple file that raises on everything" do
     end
 
     it "raises an error" do
-      expect { ActiveSupport::Deprecation.warn("This is a dummy warning") }
+      expect { RailsWarningEmitter.emit("This is a dummy warning") }
         .to raise_error(WarningSigns::UnhandledDeprecationError)
     end
 

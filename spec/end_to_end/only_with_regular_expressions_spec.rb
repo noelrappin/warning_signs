@@ -2,12 +2,12 @@ RSpec.describe "With an only matcher" do
   let(:world) { WarningSigns::World.instance }
 
   before do
-    WarningSigns::World.from_file(
-      "spec/fixtures/only_with_regular_expressions.yml"
-    )
     without_partial_double_verification do
       allow(Rails).to receive(:env).and_return("production".inquiry)
     end
+    WarningSigns::World.from_file(
+      "spec/fixtures/only_with_regular_expressions.yml"
+    )
   end
 
   describe "initialization" do

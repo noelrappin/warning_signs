@@ -2,10 +2,10 @@ RSpec.describe "With an exception matcher" do
   let(:world) { WarningSigns::World.instance }
 
   before do
-    WarningSigns::World.from_file("spec/fixtures/except.yml")
     without_partial_double_verification do
       allow(Rails).to receive(:env).and_return("production".inquiry)
     end
+    WarningSigns::World.from_file("spec/fixtures/except.yml")
   end
 
   describe "initialization" do

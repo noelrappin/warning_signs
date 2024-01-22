@@ -2,10 +2,10 @@ RSpec.describe "with a simple file that logs everything" do
   let(:world) { WarningSigns::World.instance }
 
   before do
-    WarningSigns::World.from_file("spec/fixtures/multiple_formatters_by_env.yml")
     without_partial_double_verification do
       allow(Rails).to receive(:env).and_return("production".inquiry)
     end
+    WarningSigns::World.from_file("spec/fixtures/multiple_formatters_by_env.yml")
   end
 
   describe "initialization" do
@@ -23,7 +23,7 @@ RSpec.describe "with a simple file that logs everything" do
       without_partial_double_verification do
         allow(Rails).to receive(:env).and_return("production".inquiry)
       end
-      ActiveSupport::Deprecation.warn("This is a dummy warning")
+      RailsWarningEmitter.emit("This is a dummy warning")
       expect(Rails.logger.history.first).to match(
         {
           message: /DEPRECATION WARNING: This is a dummy warning/,
@@ -40,7 +40,7 @@ RSpec.describe "with a simple file that logs everything" do
       without_partial_double_verification do
         allow(Rails).to receive(:env).and_return("development".inquiry)
       end
-      ActiveSupport::Deprecation.warn("This is a dummy warning")
+      RailsWarningEmitter.emit("This is a dummy warning")
       expect(Rails.logger.history.first).to match(
         ":message: 'DEPRECATION WARNING"
       )

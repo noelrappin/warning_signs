@@ -48,7 +48,11 @@ module WarningSigns
     end
 
     def rails_set_up
-      ActiveSupport::Deprecation.behavior = :notify
+      if ActiveSupport.version >= Gem::Version.new("7.1.0")
+        Rails.application.deprecators.behavior = :notify
+      else
+        ActiveSupport::Deprecation.behavior = :notify
+      end
     end
   end
 end

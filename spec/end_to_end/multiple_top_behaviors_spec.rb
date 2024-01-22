@@ -2,10 +2,10 @@ RSpec.describe "with a simple file that ignores everything" do
   let(:world) { WarningSigns::World.instance }
 
   before do
-    WarningSigns::World.from_file("spec/fixtures/multiple_top_behaviors.yml")
     without_partial_double_verification do
       allow(Rails).to receive(:env).and_return("production".inquiry)
     end
+    WarningSigns::World.from_file("spec/fixtures/multiple_top_behaviors.yml")
   end
 
   describe "initialization" do
@@ -51,7 +51,7 @@ RSpec.describe "with a simple file that ignores everything" do
     end
 
     it "does not raise an error" do
-      expect { ActiveSupport::Deprecation.warn("This is a dummy warning") }.not_to raise_error
+      expect { RailsWarningEmitter.emit("This is a dummy warning") }.not_to raise_error
     end
   end
 end

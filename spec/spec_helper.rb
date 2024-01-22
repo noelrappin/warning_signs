@@ -9,6 +9,7 @@ SimpleCov.start unless SimpleCov.running
 require "active_support/all"
 require "awesome_print"
 require "pry"
+require "debug"
 require "rspec"
 require "rspec/collection_matchers"
 require "warning_signs"

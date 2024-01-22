@@ -44,16 +44,16 @@ RSpec.describe "With an exception matcher" do
     end
 
     it "does not write to standard error" do
-      expect { ActiveSupport::Deprecation.warn("This is a dummy warning") }.not_to output.to_stderr
+      expect { RailsWarningEmitter.emit("This is a dummy warning") }.not_to output.to_stderr
     end
 
     it "logs" do
-      ActiveSupport::Deprecation.warn("This is a dummy warning")
+      RailsWarningEmitter.emit("This is a dummy warning")
       expect(Rails.logger.history.first).to match("DEPRECATION WARNING: This is a dummy warning")
     end
 
     it "does not raise an error" do
-      expect { ActiveSupport::Deprecation.warn("This is a dummy warning") }.not_to raise_error
+      expect { RailsWarningEmitter.emit("This is a dummy warning") }.not_to raise_error
     end
   end
 
