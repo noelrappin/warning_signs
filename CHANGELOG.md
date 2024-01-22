@@ -1,3 +1,9 @@
+## 0.7.0 Jan 22, 2024
+
+* Dropped matrix testing for Ruby 2.7
+* Added matrix testing for Ruby 3.3
+* Added support for Rails 7.1
+
 ## 0.6.1 Dec 15, 2023
 
 * Warning Signs error message makes it clearer that Warning Signs is 
