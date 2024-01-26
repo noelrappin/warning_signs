@@ -29,6 +29,8 @@ Gem::Specification.new do |spec|
   spec.executables = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
+  spec.add_dependency "rails"
+
   spec.add_development_dependency "pry-byebug"
   spec.add_development_dependency "debug"
   spec.add_development_dependency "rake"
@@ -38,4 +40,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "standard"
   spec.add_development_dependency "simplecov", "~> 0.17.0"
   spec.add_development_dependency "yard"
+  spec.add_development_dependency "awesome_print"
 end

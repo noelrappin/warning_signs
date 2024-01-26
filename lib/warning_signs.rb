@@ -4,7 +4,6 @@ require "English"
 require "yaml"
 require "rails/railtie"
 require "active_support/all"
-require "awesome_print"
 
 require "zeitwerk"
 loader = Zeitwerk::Loader.for_gem

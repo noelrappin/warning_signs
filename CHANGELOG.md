@@ -1,3 +1,7 @@
+## 0.7.1 Jan 26, 2024
+
+* Unneeded reference to awesome_print removed
+
 ## 0.7.0 Jan 22, 2024
 
 * Dropped matrix testing for Ruby 2.7
