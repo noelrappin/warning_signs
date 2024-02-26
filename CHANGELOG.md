@@ -1,3 +1,7 @@
+## 0.7.2 Feb 26, 2024
+
+* For some reason, now need to explicitly require active_support/subscriber
+
 ## 0.7.1 Jan 26, 2024
 
 * Unneeded reference to awesome_print removed

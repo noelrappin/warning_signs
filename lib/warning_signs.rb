@@ -3,6 +3,7 @@
 require "English"
 require "yaml"
 require "rails/railtie"
+require "active_support/subscriber"
 require "active_support/all"
 
 require "zeitwerk"
